@@ -34,6 +34,9 @@ function TerminalAside() {
     // this.container.childNodes[0].appendChild(this.instructions);
   }
 }
+
+var dirName = ''; // Will store the name of the folder created by the user
+
 var button = document.getElementById('make-terminal');
 button.addEventListener( 'click' , onButtonClick );
 
@@ -50,8 +53,11 @@ function onButtonClick(e) {
 function onTerminalEnter(e) {
   if(e.keyCode == 13) {
     e.preventDefault();
-    if( e.target.selectionStart - e.target.value.search('pwd') < 4 ) {
+    if( getTerminalCommand( e, 'pwd' ) ) {
       runPwd(e);
+    }
+    else if( getTerminalCommand ( e, 'ls' ) ) {
+      runLs(e);
     }
     e.target.value += '\n > $ ';
   }
@@ -61,5 +67,19 @@ function runPwd(e) {
   e.target.value += '\n/home/user/public_html';
   var aside = document.getElementById('terminal-aside');
   aside.getElementsByTagName('h2')[0].innerHTML = 'Nicely done!';
-  aside.getElementsByTagName('p')[0].innerHTML = "PWD stands for Print Working Directory. When you&rsquo;re working on your local machine, or on a remote server, PWD will show you the absolute path to the directory in which you&rsquo;re currently working. Obviously, it&rsquo;s important to execute commands in the right directory, so use <code>pwd</code> if you&rsquo;re in doubt.";
+  aside.getElementsByTagName('p')[0].innerHTML = "PWD stands for Print Working Directory. When you&rsquo;re working on your local machine, or on a remote server, PWD will show you the absolute path to the directory in which you&rsquo;re currently working. Obviously, it&rsquo;s important to execute commands in the right directory, so use <code>pwd</code> if you&rsquo;re in doubt.<p>Now, let&rsquo;s see what&rsquo;s inside our directory. Run the command <code>ls</code>.";
+}
+
+function runLs(e) {
+  e.target.value += '\ncss\nindex.html\njs'
+    if( dirName && dirName != '' ) {
+      e.target.value =+ '\n' + dirName;
+    }
+    var aside = document.getElementById('terminal-aside');
+    aside.getElementsByTagName('h2')[0].innerHTML = 'Excellent.';
+    aside.getElementsByTagName('p')[0].innerHTML = "The <code>ls</code> command lists the contents of a directory - the current directory if you don&rsquo;t tell it to look somewhere else. How would you tell it where to look? When you run a command, you can pass it arguments.<p>The next command we&rsquo;ll use is <code>mkdir</code>. We&rsquo;ll pass <code>mkdir</code> one argument - a folder name of your choice. To do this, enter <code>mkdir</code>, followed by a space, followed by your folder name (make sure it doesn't contain any spaces.)";
+}
+
+function getTerminalCommand( e , command ) {
+  return (e.target.selectionStart - e.target.value.search( command ) < 4 );
 }

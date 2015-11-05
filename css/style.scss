@@ -7,19 +7,24 @@ $bg-color1: #FFFFFF;
 $bg-color2: #EFEFEF;
 $text-color: #333;
 $link-color: #3F3F3F;
-$main-width: 60%;
+$main-width: 50%;
 $aside-width: 89%-$main-width;
-$terminal-width: 60%;
-$terminal-aside-width: 85% - $terminal-width;
+$terminal-width: 48%;
+$terminal-aside-width: 87% - $terminal-width;
+$footer-height: 100px;
 
 // Typography
 $headline-font: 'Roboto Condensed', sans-serif;
 $body-font: 'Lato', sans-serif;
-$headline-size: 3rem;
+$headline-size: 2.5rem;
 $subhead-size: 2rem;
 $footer-size: 0.75rem;
+$blue-text: #4682B4;
 
 //General
+* {
+  margin: 0;
+}
 div {
   margin: 0;
   padding: 0;
@@ -28,6 +33,20 @@ body, #body-wrapper, .outer {
   margin: 0;
   color: #333;
   background: $bg-color1;
+}
+html, body {
+  height: 100%;
+}
+#body-wrapper {
+  min-height: 100%;
+  margin-bottom: -$footer-height;
+}
+#body-wrapper:after {
+  content: "";
+  display: block;
+}
+#footer-outer, #body-wrapper:after {
+  height: $footer-height;
 }
 body {
   width: 100%;
@@ -66,6 +85,10 @@ h2 {
   clear: both;
   overflow: hidden;
 }
+#footer-outer.outer {
+  padding: 0;
+  width: 100%;
+}
 .inner {
   padding: 0;
   width: 96%;
@@ -84,6 +107,9 @@ p {
   font-size: 1.25rem;
   line-height: 2em;
 }
+.blue-text {
+  color: $blue-text;
+}
 
 //Nav Bar
 #nav-outer {
@@ -98,26 +124,27 @@ p {
 #nav-outer a:hover {
   color: #AAA;
 }
-#nav-wrapper.inner {
+header.inner {
   padding-bottom: 1%;
 }
-#nav-wrapper, #main-navigation {
+header, #main-navigation {
   overflow: hidden;
 }
-#nav-wrapper div, #nav-wrapper ul li {
+header div, header ul li {
   float: left;
 }
-#nav-wrapper ul li {
+header ul li {
   padding: 1rem;
 }
 #main-navigation {
   float: left;
 }
 #logo-wrapper h1 {
-  margin-top: 0.2em;
-  margin-bottom: -1em;
+  margin-top: 0.1em;
+  padding: 0;
+  margin-bottom: 0;
 }
-#nav-wrapper #social {
+header #social {
   float: right;
   margin-top: -15px;
 }
@@ -125,14 +152,14 @@ p {
   font-size: 3rem;
 }
 
-//Header
-#header-outer, #footer-outer {
+//#main-content
+#footer-outer {
   background: $bg-color2;
 }
-header {
+#main-content {
   text-align: center;
 }
-header img {
+#main-content img {
   text-align: center;
 }
 button {
@@ -163,7 +190,7 @@ button:hover {
   width: $terminal-width;
   height: 500px;
   margin-bottom: 3%;
-  margin-right: 5%;
+  margin-right: 3%;
   padding: 2%;
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 1rem;
@@ -213,6 +240,9 @@ article img {
 }
 
 //Footer
+footer.inner {
+  margin-top: 20px;
+}
 footer ul {
   float: left;
   width: 50%;
@@ -227,10 +257,10 @@ footer ul li {
 footer section {
   float: right;
   margin: 0;
-  padding: 1em 0;
+  padding: 1em;
 }
-@media only screen and (max-width: 767px) {
-  h1 {
+@media only screen and (max-width: 900px) {
+  #logo-wrapper h1 {
     margin-bottom: 0;
   }
   #logo-wrapper {
@@ -239,19 +269,23 @@ footer section {
     text-align: center;
     width: 100%;
   }
-  #main, #sidebar-navigation, #main-navigation, #terminal, #terminal-container aside {
+  #main-navigation, #terminal, #terminal-container aside {
     width: 90%;
     margin: 0 auto;
     display: block;
     float: none;
     clear: both;
   }
+  #main-navigation {
+    padding: 0;
+  }
   #main-navigation ul li {
     display: block;
     width: 100%;
     text-align: center;
     padding: 0.5rem 0;
-    margin: 0 auto;
+    margin: 0;
+    text-align: center;
   }
   #social {
     display: none;
