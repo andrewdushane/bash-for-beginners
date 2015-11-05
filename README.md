@@ -2,4 +2,4 @@
 
 ### Conceptual layout for the BFB homepage
 
-![Screenshot](/images/bfb-wireframe-screenshot.png)
+![Screenshot](/images/constructor-with-listener.gif)
