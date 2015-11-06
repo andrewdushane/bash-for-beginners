@@ -56,8 +56,16 @@ function onTerminalEnter(e) {
     if( getTerminalCommand( e, 'pwd' ) ) {
       runPwd(e);
     }
-    else if( getTerminalCommand ( e, 'ls' ) ) {
+    else if( getTerminalCommand( e, 'ls' ) ) {
       runLs(e);
+    }
+    else if( getTerminalCommand( e, 'mkdir' )) {
+      runMkDir(e);
+    }
+    else if( getTerminalCommand( e, 'clear' )) {
+      runClear(e);
+      e.target.value += ' > $ ';
+      return;
     }
     e.target.value += '\n > $ ';
   }
@@ -73,13 +81,30 @@ function runPwd(e) {
 function runLs(e) {
   e.target.value += '\ncss\nindex.html\njs'
     if( dirName && dirName != '' ) {
-      e.target.value =+ '\n' + dirName;
+      e.target.value += '\n' + dirName;
     }
     var aside = document.getElementById('terminal-aside');
     aside.getElementsByTagName('h2')[0].innerHTML = 'Excellent.';
-    aside.getElementsByTagName('p')[0].innerHTML = "The <code>ls</code> command lists the contents of a directory - the current directory if you don&rsquo;t tell it to look somewhere else. How would you tell it where to look? When you run a command, you can pass it arguments.<p>The next command we&rsquo;ll use is <code>mkdir</code>. We&rsquo;ll pass <code>mkdir</code> one argument - a folder name of your choice. To do this, enter <code>mkdir</code>, followed by a space, followed by your folder name (make sure it doesn't contain any spaces.)";
+    aside.getElementsByTagName('p')[0].innerHTML = "The <code>ls</code> command lists the contents of a directory - the current directory if you don&rsquo;t tell it to look somewhere else. How would you tell it where to look? When you run a command, you can pass it arguments.<p>The next command we&rsquo;ll use is <code>mkdir</code>. We&rsquo;ll pass <code>mkdir</code> one argument - a folder name of your choice. To do this, enter <code>mkdir</code>, followed by a space, followed by your folder name (make sure it doesn't contain any spaces.)<p>It should look something like this: <code>mkdir myfolder</code>";
+}
+
+function runMkDir(e) {
+  dirName = e.target.value.substr( e.target.value.lastIndexOf( 'mkdir' ) + 6 );
+}
+
+function runClear(e) {
+  e.target.value = '';
 }
 
 function getTerminalCommand( e , command ) {
-  return (e.target.selectionStart - e.target.value.search( command ) < 4 );
+  var commandLoc = e.target.value.lastIndexOf( command );
+  var promptLoc = e.target.value.lastIndexOf( ' > $ ' );
+  var cursor = e.target.selectionStart;
+  if( commandLoc !== -1 && promptLoc !== -1) {
+    if( (promptLoc < commandLoc) && (commandLoc < cursor) ) {
+      return true;
+    }
+    else return false;
+  }
+  else return false;
 }
