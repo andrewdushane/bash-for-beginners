@@ -6,7 +6,6 @@ $outer-padding: 2.5% 3% 3%;
 $bg-color1: #FFFFFF;
 $bg-color2: #EFEFEF;
 $text-color: #333;
-$link-color: #3F3F3F;
 $main-width: 50%;
 $aside-width: 89%-$main-width;
 $terminal-width: 48%;
@@ -96,7 +95,7 @@ h2 {
   overflow: hidden;
 }
 a {
-  color: $link-color;
+  color: $blue-text;
   text-decoration: none;
 }
 a:hover {
