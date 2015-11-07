@@ -1,5 +1,7 @@
-## Bash for Beginners Wireframe
+## Bash for Beginners
 
-### Conceptual layout for the BFB homepage
+### Interactive command line tutorial
 
-![Screenshot](/images/constructor-with-listener.gif)
+#### Vanilla JS
+
+![Screenshot](images/bfb-wireframe-screenshot.png)
